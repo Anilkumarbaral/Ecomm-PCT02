@@ -1,6 +1,5 @@
 package com.auth.filter;
 
-
 import com.auth.service.CustomUserDetailsService;
 import com.auth.service.JwtService;
 import jakarta.servlet.FilterChain;
@@ -26,6 +25,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final CustomUserDetailsService userDetailsService;
+
+    private static final String[] EXCLUDED_PATHS = {
+            "/api/auth/login",
+            "/api/auth/register",
+            "/api/auth/forgot-password",
+            "/api/auth/reset-password"
+    };
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String path = request.getServletPath();
+        for (String excluded : EXCLUDED_PATHS) {
+            if (path.equals(excluded)) {
+                return true; // skip JWT filter
+            }
+        }
+        return false; // run the filter
+    }
 
     @Override
     protected void doFilterInternal(

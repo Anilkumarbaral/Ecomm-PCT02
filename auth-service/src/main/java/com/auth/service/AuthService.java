@@ -154,6 +154,7 @@ public class AuthService {
             return false;
         }
     }
+    @Transactional
     public void forgotPassword(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -173,7 +174,7 @@ public class AuthService {
 
         passwordResetTokenRepository.save(resetToken);
 
-        String resetUrl = "https://your-frontend-app.com/reset-password?token=" + token;
+        String resetUrl = "https://localhost:8080/api/auth/reset-password?token=" + token;
         emailService.send(user.getEmail(), "Password Reset", "Reset link: " + resetUrl);
 
         log.info("Password reset token saved to DB for user {}", user.getEmail());
