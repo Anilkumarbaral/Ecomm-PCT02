@@ -1,0 +1,70 @@
+#  server:
+#    port: 8080
+#    servlet:
+#      context-path: /api/v1
+#
+#  spring:
+#    application:
+#      name: ecommerce-auth-service
+#
+#    datasource:
+#      url: jdbc:postgresql://localhost:5432/ecommerce_auth
+#      username: ${DB_USERNAME:postgres}
+#      password: ${DB_PASSWORD:password}
+#      driver-class-name: org.postgresql.Driver
+#      hikari:
+#        maximum-pool-size: 20
+#        minimum-idle: 5
+#        idle-timeout: 300000
+#        connection-timeout: 20000
+#
+#    jpa:
+#      hibernate:
+#        ddl-auto: validate
+#      show-sql: false
+#      properties:
+#        hibernate:
+#          dialect: org.hibernate.dialect.PostgreSQLDialect
+#          format_sql: true
+#      open-in-view: false
+#
+#    liquibase:
+#      change-log: classpath:db/changelog/db.changelog-master.xml
+#
+#    security:
+#      jwt:
+#        secret-key: ${JWT_SECRET:your-256-bit-secret-key-here-make-it-strong}
+#        expiration: 86400000 # 24 hours
+#        refresh-expiration: 604800000 # 7 days
+#
+#  logging:
+#    level:
+#      com.ecommerce.auth: INFO
+#      org.springframework.security: DEBUG
+#    pattern:
+#      console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+#      file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+#    file:
+#      name: logs/auth-service.log
+#
+#  management:
+#    endpoints:
+#      web:
+#        exposure:
+#          include: health,info,metrics
+#    endpoint:
+#      health:
+#        show-details: always
+
+#spring:
+#  mail:
+#    host: smtp.gmail.com
+#    port: 587
+#    username: your-email@gmail.com
+#    password: your-app-password
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          starttls:
+#            enable: true
